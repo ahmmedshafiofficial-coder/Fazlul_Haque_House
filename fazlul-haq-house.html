@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ফজলুল হক হাউস — DRMC</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+
+  :root {
+    --green: #1a6b2f;
+    --green-dark: #0f4420;
+    --green-light: #2d8a47;
+    --gold: #c8a94a;
+    --gold-light: #e8c96a;
+    --black: #0a0e0b;
+    --white: #f5f8f5;
+    --gray: #e0e8e1;
+    --text-dark: #1a1f1b;
+    --text-light: #4a5c4d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Hind Siliguri', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 60%, var(--green-light) 100%);
+    padding: 20px 16px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: rgba(200,169,74,0.15);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -30px;
+    width: 100px; height: 100px;
+    background: rgba(200,169,74,0.1);
+    border-radius: 50%;
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .logo-circle {
+    width: 48px; height: 48px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--green-dark);
+    flex-shrink: 0;
+    box-shadow: 0 2px 12px rgba(200,169,74,0.5);
+  }
+  .header-title {
+    position: relative; z-index: 1;
+  }
+  .header-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .header-title p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 2px;
+  }
+  .clock-box {
+    position: relative; z-index: 1;
+    background: rgba(0,0,0,0.25);
+    border: 1px solid rgba(200,169,74,0.4);
+    border-radius: 10px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .clock-time {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+  }
+  .clock-date {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 2px;
+  }
+
+  /* NAV TABS */
+  .nav-tabs {
+    display: flex;
+    background: var(--green-dark);
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 2px solid var(--gold);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 13px 16px;
+    background: transparent;
+    border: none;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tab-btn.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+    background: rgba(200,169,74,0.08);
+  }
+  .tab-btn:hover:not(.active) {
+    color: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* CONTENT SECTIONS */
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: #111a12;
+    border: 1px solid #1e3320;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold-light);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title span { font-size: 16px; }
+
+  /* NOTICE BOARD */
+  .notice-item {
+    background: #0d1710;
+    border-left: 3px solid var(--green-light);
+    border-radius: 0 8px 8px 0;
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  .notice-item.important { border-left-color: var(--gold); }
+  .notice-date {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-bottom: 4px;
+  }
+  .notice-title {
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.5;
+  }
+  .notice-badge {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-dark);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+
+  /* RULES */
+  .rule-item {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #1a2e1c;
+  }
+  .rule-item:last-child { border-bottom: none; }
+  .rule-num {
+    width: 26px; height: 26px;
+    background: var(--green);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+  .rule-text { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+  /* CLOTHES LIST */
+  .clothes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .clothes-item {
+    background: #0d1710;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .clothes-count {
+    font-weight: 700;
+    color: var(--gold-light);
+    font-size: 14px;
+    min-width: 20px;
+  }
+
+  /* TEACHERS */
+  .teacher-card {
+    background: #0d1710;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .teacher-avatar {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--green), var(--green-light));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .teacher-name { font-size: 13px; font-weight: 600; color: var(--white); }
+  .teacher-role { font-size: 11px; color: var(--gold-light); margin-top: 2px; }
+  .teacher-phone { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .call-btn {
+    margin-left: auto;
+    background: var(--green);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .call-btn:hover { background: var(--green-light); }
+
+  /* SEARCH */
+  .search-box {
+    display: flex;
+    background: #0d1710;
+    border: 1px solid #1e3320;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    gap: 8px;
+    align-items: center;
+  }
+  .search-box input {
+    background: transparent;
+    border: none;
+    color: var(--white);
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 13px;
+    outline: none;
+    width: 100%;
+  }
+  .search-box input::placeholder { color: var(--text-light); }
+
+  /* CLUBS */
+  .clubs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .club-card {
+    background: #0d1710;
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    border: 1px solid #1e3320;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+  .club-card:hover { border-color: var(--green-light); }
+  .club-icon { font-size: 26px; margin-bottom: 6px; }
+  .club-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.85); line-height: 1.3; }
+
+  /* ABOUT HOUSE */
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .stat-box {
+    background: #0d1710;
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    border: 1px solid #1e3320;
+  }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--gold-light); }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  /* QUICK LINKS */
+  .quick-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .quick-btn {
+    background: linear-gradient(135deg, var(--green-dark), var(--green));
+    border: 1px solid var(--green-light);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: white;
+    font-family: 'Hind Siliguri', sans-serif;
+  }
+  .quick-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(26,107,47,0.4); }
+  .quick-btn-icon { font-size: 24px; margin-bottom: 6px; }
+  .quick-btn-label { font-size: 12px; font-weight: 500; }
+
+  /* SECTION HEADER */
+  .section-header {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e3320;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* TAG */
+  .tag {
+    display: inline-block;
+    background: rgba(26,107,47,0.4);
+    border: 1px solid var(--green-light);
+    color: #7dd498;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin: 3px 2px;
+  }
+
+  /* EMERGENCY */
+  .emergency-card {
+    background: linear-gradient(135deg, #1a0a0a, #2d0f0f);
+    border: 1px solid #8b2020;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .emergency-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .emergency-num {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ff8888;
+    letter-spacing: 1px;
+  }
+  .emergency-label { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+  .green-tag {
+    background: var(--green);
+    color: white;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  /* FILTER BTNS */
+  .filter-row {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+  }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    flex-shrink: 0;
+    background: #0d1710;
+    border: 1px solid #1e3320;
+    border-radius: 20px;
+    padding: 6px 14px;
+    color: rgba(255,255,255,0.7);
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .filter-btn.active {
+    background: var(--green);
+    border-color: var(--green-light);
+    color: white;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo-circle">ফ</div>
+    <div class="header-title">
+      <h1>ফজলুল হক হাউস</h1>
+      <p>শের-ই-বাংলা এ.কে. ফজলুল হক হাউস • DRMC</p>
+    </div>
+  </div>
+  <div class="clock-box">
+    <div class="clock-time" id="clock">--:--:--</div>
+    <div class="clock-date" id="dateDisplay">লোড হচ্ছে...</div>
+  </div>
+</div>
+
+<!-- NAV TABS -->
+<div class="nav-tabs">
+  <button class="tab-btn active" onclick="showTab('home')">🏠 হোম</button>
+  <button class="tab-btn" onclick="showTab('notice')">📋 নোটিশ</button>
+  <button class="tab-btn" onclick="showTab('rules')">📜 নিয়মকানুন</button>
+  <button class="tab-btn" onclick="showTab('teachers')">👨‍🏫 শিক্ষক</button>
+  <button class="tab-btn" onclick="showTab('clubs')">🎯 ক্লাব</button>
+  <button class="tab-btn" onclick="showTab('contact')">📞 যোগাযোগ</button>
+</div>
+
+<!-- HOME -->
+<div class="section active" id="tab-home">
+  <div class="stat-row">
+    <div class="stat-box">
+      <div class="stat-num">১৩০+</div>
+      <div class="stat-label">আবাসিক ছাত্র</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">১৯৬০</div>
+      <div class="stat-label">প্রতিষ্ঠা সাল</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">৯ম-১২শ</div>
+      <div class="stat-label">শ্রেণি</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">৭টি</div>
+      <div class="stat-label">মোট হাউস</div>
+    </div>
+  </div>
+
+  <div class="quick-links">
+    <div class="quick-btn" onclick="showTab('notice')">
+      <div class="quick-btn-icon">📋</div>
+      <div class="quick-btn-label">নোটিশ বোর্ড</div>
+    </div>
+    <div class="quick-btn" onclick="showTab('rules')">
+      <div class="quick-btn-icon">📜</div>
+      <div class="quick-btn-label">নিয়মকানুন</div>
+    </div>
+    <div class="quick-btn" onclick="showTab('teachers')">
+      <div class="quick-btn-icon">👨‍🏫</div>
+      <div class="quick-btn-label">শিক্ষকবৃন্দ</div>
+    </div>
+    <div class="quick-btn" onclick="showTab('contact')">
+      <div class="quick-btn-icon">🆘</div>
+      <div class="quick-btn-label">জরুরি যোগাযোগ</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🏛️</span> হাউস পরিচিতি</div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.8);line-height:1.7;">
+      শের-ই-বাংলা এ.কে. ফজলুল হক হাউস DRMC-র অন্যতম ঐতিহ্যবাহী আবাসিক হাউস।
+      এই হাউসে ৯ম থেকে ১২শ শ্রেণির প্রায় ১৩০ জনেরও বেশি ছাত্র বাস করে।
+      হাউসটি বিখ্যাত রাজনীতিবিদ শের-ই-বাংলা এ.কে. ফজলুল হকের নামে নামকরণ করা হয়েছে।
+    </p>
+    <div style="margin-top:10px;">
+      <span class="tag">House Master</span>
+      <span class="tag">House Tutor</span>
+      <span class="tag">House Captain</span>
+      <span class="tag">House Prefect</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>⚠️</span> সর্বশেষ নোটিশ</div>
+    <div class="notice-item important">
+      <div class="notice-date">০৩ জুন ২০২৬</div>
+      <div class="notice-title">৩য়-১০ম শ্রেণির অর্ধ-বার্ষিক, ১০ম শ্রেণির প্রাক-নির্বাচন ও ১১শ শ্রেণির বার্ষিক পরীক্ষা সংক্রান্ত নোটিশ <span class="notice-badge">নতুন</span></div>
+    </div>
+    <div class="notice-item">
+      <div class="notice-date">২০ মে ২০২৬</div>
+      <div class="notice-title">পবিত্র ঈদ-উল-আযহা ও গ্রীষ্মকালীন অবকাশ সংক্রান্ত জরুরি নোটিশ</div>
+    </div>
+    <div style="text-align:center;margin-top:10px;">
+      <button onclick="showTab('notice')" style="background:var(--green);border:none;color:white;padding:8px 20px;border-radius:8px;font-family:'Hind Siliguri',sans-serif;font-size:13px;cursor:pointer;">সব নোটিশ দেখুন →</button>
+    </div>
+  </div>
+</div>
+
+<!-- NOTICE -->
+<div class="section" id="tab-notice">
+  <div class="section-header">📋 নোটিশ বোর্ড</div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterNotice('all', this)">সব</button>
+    <button class="filter-btn" onclick="filterNotice('academic', this)">একাডেমিক</button>
+    <button class="filter-btn" onclick="filterNotice('exam', this)">পরীক্ষা</button>
+    <button class="filter-btn" onclick="filterNotice('admin', this)">প্রশাসনিক</button>
+    <button class="filter-btn" onclick="filterNotice('fee', this)">ফি</button>
+  </div>
+
+  <div id="notice-list">
+    <div class="notice-item important" data-cat="exam">
+      <div class="notice-date">০৭ মে ২০২৬ <span class="green-tag">পরীক্ষা</span></div>
+      <div class="notice-title">৩য়-৮ম শ্রেণির অর্ধ-বার্ষিক পরীক্ষার রুটিন-২০২৬ (সংশোধিত) <span class="notice-badge">নতুন</span></div>
+    </div>
+    <div class="notice-item important" data-cat="exam">
+      <div class="notice-date">০৬ মে ২০২৬ <span class="green-tag">পরীক্ষা</span></div>
+      <div class="notice-title">নবম শ্রেণির অর্ধ-বার্ষিক ও দশম শ্রেণির প্রাক-নির্বাচনি পরীক্ষার রুটিন-২০২৬</div>
+    </div>
+    <div class="notice-item important" data-cat="exam">
+      <div class="notice-date">০৬ মে ২০২৬ <span class="green-tag">পরীক্ষা</span></div>
+      <div class="notice-title">একাদশ শ্রেণির বার্ষিক পরীক্ষার রুটিন-২০২৬</div>
+    </div>
+    <div class="notice-item" data-cat="academic">
+      <div class="notice-date">১২ মে ২০২৬ <span class="green-tag">একাডেমিক</span></div>
+      <div class="notice-title">ক্যাম্পাস শৃঙ্খলা সংক্রান্ত অফিস আদেশ</div>
+    </div>
+    <div class="notice-item" data-cat="academic">
+      <div class="notice-date">০৩ জুন ২০২৬ <span class="green-tag">একাডেমিক</span></div>
+      <div class="notice-title">৩য়-১০ম শ্রেণির অর্ধ-বার্ষিক, ১০ম শ্রেণির প্রাক-নির্বাচন ও ১১শ শ্রেণির বার্ষিক পরীক্ষা প্রসঙ্গে</div>
+    </div>
+    <div class="notice-item" data-cat="admin">
+      <div class="notice-date">০৯ জুন ২০২৬ <span class="green-tag">প্রশাসনিক</span></div>
+      <div class="notice-title">২০২৫-২০২৬ অর্থবছরের বিল ও ভাউচার দাখিল সংক্রান্ত অফিস নোটিশ</div>
+    </div>
+    <div class="notice-item" data-cat="admin">
+      <div class="notice-date">২৯ মার্চ ২০২৬ <span class="green-tag">প্রশাসনিক</span></div>
+      <div class="notice-title">এসএসসি ২০২৬ পরীক্ষার্থীদের হাউসে অবস্থান করা প্রসঙ্গে</div>
+    </div>
+    <div class="notice-item" data-cat="fee">
+      <div class="notice-date">৩০ এপ্রিল ২০২৬ <span class="green-tag">ফি</span></div>
+      <div class="notice-title">২০২৬ শিক্ষাবর্ষে ৮ম শ্রেণির রেজিস্ট্রেশন ফি জমা প্রদান প্রসঙ্গে</div>
+    </div>
+    <div class="notice-item" data-cat="fee">
+      <div class="notice-date">১৮ ফেব্রুয়ারি ২০২৬ <span class="green-tag">ফি</span></div>
+      <div class="notice-title">এসএসসি ২০২৬ পরীক্ষার্থীদের হাউস চার্জ পরিশোধ প্রসঙ্গে</div>
+    </div>
+    <div class="notice-item" data-cat="academic">
+      <div class="notice-date">২২ এপ্রিল ২০২৬ <span class="green-tag">একাডেমিক</span></div>
+      <div class="notice-title">আন্ত হাউস ক্রিকেট প্রতিযোগিতা ২০২৬</div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px;text-align:center;">
+    <a href="https://www.drmc.edu.bd/Pages/NoticeBoard/NoticeBoardNew.aspx" target="_blank"
+       style="display:inline-block;background:var(--green);color:white;padding:10px 24px;border-radius:8px;font-size:13px;text-decoration:none;font-family:'Hind Siliguri',sans-serif;">
+      🌐 DRMC ওয়েবসাইটে সব নোটিশ
+    </a>
+  </div>
+</div>
+
+<!-- RULES -->
+<div class="section" id="tab-rules">
+  <div class="section-header">📜 হাউসের নিয়মকানুন</div>
+
+  <div class="card">
+    <div class="card-title"><span>🚫</span> নিষিদ্ধ বিষয়সমূহ</div>
+    <div class="rule-item">
+      <div class="rule-num">১</div>
+      <div class="rule-text">মোবাইল ফোন, TV, রেডিও, কম্পিউটার, সোনার গহনা বা নগদ টাকা হাউসে আনা নিষেধ।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">২</div>
+      <div class="rule-text">লুঙ্গি পরা অনুমোদিত নয়। ঘুমানোর জন্য নির্ধারিত স্লিপিং স্যুট পরতে হবে।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">৩</div>
+      <div class="rule-text">রঙিন বা ফ্যান্সি পোশাক আনা যাবে না। সিল্ক বা দামি পোশাক নিষেধ।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">৪</div>
+      <div class="rule-text">জন্মদিন পালন, বিয়ে বা অন্য অনুষ্ঠানের জন্য ক্লাস চলাকালীন ছুটি চাওয়া যাবে না।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">৫</div>
+      <div class="rule-text">অভিভাবকদের একাডেমিক ক্যালেন্ডারে নির্ধারিত তারিখ ছাড়া হাউসে আসা যাবে না।</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>✅</span> পালনীয় নিয়মাবলি</div>
+    <div class="rule-item">
+      <div class="rule-num">১</div>
+      <div class="rule-text">হাউসে আসার আগেই চুল ছোট করে ছেঁটে আসতে হবে।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">২</div>
+      <div class="rule-text">ছুটি শেষে অবশ্যই নির্ধারিত তারিখে হাউসে ফিরে আসতে হবে।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">৩</div>
+      <div class="rule-text">গুরুতর অসুস্থতার ক্ষেত্রে ডাক্তারি সনদসহ অধ্যক্ষের কাছে আগেই আবেদন করতে হবে।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">৪</div>
+      <div class="rule-text">পোশাকে সংক্ষিপ্ত নাম ও কলেজ নম্বর অবশ্যই থাকতহবে।</div>
+    </div>
+    <div class="rule-item">
+      <div class="rule-num">৫</div>
+      <div class="rule-text">প্রতিটি সাময়িকের শুরুতে ৬ মাসের টয়লেট সামগ্রী নিয়ে আসতে হবে।</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>👕</span> গ্রীষ্মকালীন পোশাকের তালিকা</div>
+    <div class="clothes-grid">
+      <div class="clothes-item"><span class="clothes-count">৬টি</span> সাদা হাফ শার্ট</div>
+      <div class="clothes-item"><span class="clothes-count">৬টি</span> নেভি ব্লু হাফ প্যান্ট</div>
+      <div class="clothes-item"><span class="clothes-count">৬টি</span> সাদা ফুল শার্ট</div>
+      <div class="clothes-item"><span class="clothes-count">৪টি</span> সাদা ফুল প্যান্ট</div>
+      <div class="clothes-item"><span class="clothes-count">৬টি</span> সাদা স্যান্ডো গেঞ্জি</div>
+      <div class="clothes-item"><span class="clothes-count">৬ জোড়া</span> সাদা মোজা</div>
+      <div class="clothes-item"><span class="clothes-count">৩টি</span> স্লিপিং স্যুট</div>
+      <div class="clothes-item"><span class="clothes-count">১ জোড়া</span> কালো অক্সফোর্ড জুতা</div>
+      <div class="clothes-item"><span class="clothes-count">৩টি</span> সাদা পাঞ্জাবি</div>
+      <div class="clothes-item"><span class="clothes-count">৩টি</span> সাদা টুপি</div>
+    </div>
+    <div style="margin-top:10px;padding:10px;background:#0a1a0c;border-radius:8px;">
+      <div style="font-size:12px;color:var(--gold-light);font-weight:600;margin-bottom:4px;">❄️ শীতকালীন পোশাক</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.7);">১টি কম্বল • ২টি নেভি ব্লু সোয়েটার (হাফ ও ফুল)</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🛏️</span> বিছানাপত্র তালিকা</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+      <div class="clothes-item"><span class="clothes-count">১টি</span> তোশক (৬'×৩')</div>
+      <div class="clothes-item"><span class="clothes-count">১টি</span> শতরঞ্জি</div>
+      <div class="clothes-item"><span class="clothes-count">১টি</span> নীল মশারি</div>
+      <div class="clothes-item"><span class="clothes-count">১টি</span> বালিশ</div>
+      <div class="clothes-item"><span class="clothes-count">২টি</span> সাদা চাদর</div>
+      <div class="clothes-item"><span class="clothes-count">২টি</span> নেভি ব্লু চাদর</div>
+    </div>
+  </div>
+</div>
+
+<!-- TEACHERS -->
+<div class="section" id="tab-teachers">
+  <div class="section-header">👨‍🏫 শিক্ষকবৃন্দ</div>
+
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" placeholder="নাম বা বিভাগ খুঁজুন..." oninput="searchTeachers(this.value)" id="teacher-search">
+  </div>
+
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterTeachers('all', this)">সবাই</button>
+    <button class="filter-btn" onclick="filterTeachers('vp', this)">উপাধ্যক্ষ</button>
+    <button class="filter-btn" onclick="filterTeachers('prof', this)">অধ্যাপক</button>
+    <button class="filter-btn" onclick="filterTeachers('asst', this)">সহকারী</button>
+    <button class="filter-btn" onclick="filterTeachers('lecturer', this)">প্রভাষক</button>
+  </div>
+
+  <div id="teacher-list">
+    <div class="teacher-card" data-role="vp" data-name="ফাতেমা জোহরা">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div>
+        <div class="teacher-name">Fatema Zohra</div>
+        <div class="teacher-role">উপাধ্যক্ষ (সিনিয়র) • প্রভাতি</div>
+        <div class="teacher-phone">📱 01914865142</div>
+      </div>
+      <a href="tel:01914865142" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="vp" data-name="Mohammed Shahid Ullah">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <div>
+        <div class="teacher-name">Mohammed Shahid Ullah</div>
+        <div class="teacher-role">উপাধ্যক্ষ (সিনিয়র) • দিবা</div>
+        <div class="teacher-phone">📱 01552340891</div>
+      </div>
+      <a href="tel:01552340891" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="prof" data-name="J. M. Arifur Rahman">
+      <div class="teacher-avatar">👨‍🔬</div>
+      <div>
+        <div class="teacher-name">J. M. Arifur Rahman</div>
+        <div class="teacher-role">বিভাগীয় প্রধান • রসায়ন</div>
+        <div class="teacher-phone">📱 01552459800</div>
+      </div>
+      <a href="tel:01552459800" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="prof" data-name="Dr. Rani Nasrin">
+      <div class="teacher-avatar">👩‍🔬</div>
+      <div>
+        <div class="teacher-name">Dr. Rani Nasrin</div>
+        <div class="teacher-role">বিভাগীয় প্রধান • পদার্থবিজ্ঞান</div>
+        <div class="teacher-phone">📱 01711664949</div>
+      </div>
+      <a href="tel:01711664949" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="prof" data-name="Nasreen Banu">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div>
+        <div class="teacher-name">Nasreen Banu</div>
+        <div class="teacher-role">বিভাগীয় প্রধান • জীববিজ্ঞান</div>
+        <div class="teacher-phone">📱 01814786776</div>
+      </div>
+      <a href="tel:01814786776" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="prof" data-name="Sudarshan Kumar Saha">
+      <div class="teacher-avatar">👨‍🏫</div>
+      <div>
+        <div class="teacher-name">Sudarshan Kumar Saha</div>
+        <div class="teacher-role">বিভাগীয় প্রধান • গণিত</div>
+        <div class="teacher-phone">📱 01819295162</div>
+      </div>
+      <a href="tel:01819295162" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="prof" data-name="Akhter Jahan Ferdousi Banu">
+      <div class="teacher-avatar">👩‍💻</div>
+      <div>
+        <div class="teacher-name">Akhter Jahan Ferdousi Banu</div>
+        <div class="teacher-role">বিভাগীয় প্রধান • ICT</div>
+        <div class="teacher-phone">📱 01712593167</div>
+      </div>
+      <a href="tel:01712593167" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="asst" data-name="Md. Farhad Hossain">
+      <div class="teacher-avatar">🌍</div>
+      <div>
+        <div class="teacher-name">Md. Farhad Hossain</div>
+        <div class="teacher-role">বিভাগীয় প্রধান • ভূগোল</div>
+        <div class="teacher-phone">📱 01913512918</div>
+      </div>
+      <a href="tel:01913512918" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="lecturer" data-name="Sayed Mahbub Hasan Amiri">
+      <div class="teacher-avatar">💻</div>
+      <div>
+        <div class="teacher-name">Sayed Mahbub Hasan Amiri</div>
+        <div class="teacher-role">প্রভাষক • ICT</div>
+        <div class="teacher-phone">📱 01713891089</div>
+      </div>
+      <a href="tel:01713891089" class="call-btn">📞</a>
+    </div>
+    <div class="teacher-card" data-role="lecturer" data-name="Rasel Ahmed">
+      <div class="teacher-avatar">💻</div>
+      <div>
+        <div class="teacher-name">Rasel Ahmed</div>
+        <div class="teacher-role">সহকারী অধ্যাপক • ICT</div>
+        <div class="teacher-phone">📱 01720210229</div>
+      </div>
+      <a href="tel:01720210229" class="call-btn">📞</a>
+    </div>
+  </div>
+</div>
+
+<!-- CLUBS -->
+<div class="section" id="tab-clubs">
+  <div class="section-header">🎯 ক্লাব ও সংগঠন</div>
+
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-title"><span>⭐</span> DRMC-র সকল ক্লাব</div>
+    <p style="font-size:12px;color:rgba(255,255,255,0.6);">যেকোনো ক্লাবে যোগ দিতে সংশ্লিষ্ট শিক্ষকের সাথে যোগাযোগ করুন।</p>
+  </div>
+
+  <div class="clubs-grid">
+    <div class="club-card">
+      <div class="club-icon">🔬</div>
+      <div class="club-name">Science Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">💻</div>
+      <div class="club-name">IT Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">📸</div>
+      <div class="club-name">Photography Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">➕</div>
+      <div class="club-name">Red Crescent (RYRC)</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">⚽</div>
+      <div class="club-name">Games & Sports Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🎖️</div>
+      <div class="club-name">BNCC</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🔢</div>
+      <div class="club-name">Math Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🎨</div>
+      <div class="club-name">Art Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🎵</div>
+      <div class="club-name">Music & Cultural Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🤝</div>
+      <div class="club-name">Social Service Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🌐</div>
+      <div class="club-name">DRMC MUNA</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">⚜️</div>
+      <div class="club-name">Scout Unit</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🗣️</div>
+      <div class="club-name">Language Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">☪️</div>
+      <div class="club-name">Islamic Cultural Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">💼</div>
+      <div class="club-name">Business & Career Club</div>
+    </div>
+    <div class="club-card">
+      <div class="club-icon">🎤</div>
+      <div class="club-name">Debating Club</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="tab-contact">
+  <div class="section-header">📞 যোগাযোগ</div>
+
+  <div class="emergency-card">
+    <div class="emergency-title">🚨 জরুরি যোগাযোগ</div>
+    <div style="margin-bottom:8px;">
+      <div class="emergency-label">কলেজ ফোন</div>
+      <div class="emergency-num">02-58153774</div>
+    </div>
+    <div style="margin-bottom:8px;">
+      <div class="emergency-label">ফ্যাক্স</div>
+      <div style="font-size:16px;color:#ff8888;">02-58153682</div>
+    </div>
+    <a href="tel:0258153774" style="display:block;background:#8b2020;color:white;text-align:center;padding:10px;border-radius:8px;text-decoration:none;font-family:'Hind Siliguri',sans-serif;font-size:14px;font-weight:600;margin-top:10px;">📞 এখনই কল করুন</a>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🏫</span> কলেজ ঠিকানা</div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.85);line-height:1.7;">
+      ঢাকা রেসিডেনসিয়াল মডেল কলেজ<br>
+      মোহাম্মদপুর, ঢাকা-১২০৭<br>
+      (মিরপুর রোড, শের-ই-বাংলা নগর)
+    </p>
+    <div style="margin-top:10px;">
+      <div style="font-size:12px;color:var(--gold-light);">📧 ইমেইল</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">info@drmc.edu.bd</div>
+      <div style="font-size:13px;color:rgba(255,255,255,0.8);">drmc_bd@yahoo.com</div>
+    </div>
+    <a href="https://maps.google.com/?q=Dhaka+Residential+Model+College" target="_blank"
+       style="display:block;background:var(--green);color:white;text-align:center;padding:10px;border-radius:8px;text-decoration:none;font-family:'Hind Siliguri',sans-serif;font-size:13px;margin-top:12px;">
+      📍 গুগল ম্যাপে দেখুন
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>👨‍💼</span> প্রধান কর্তাব্যক্তি</div>
+    <div class="teacher-card" style="background:transparent;padding:0;margin-bottom:10px;">
+      <div class="teacher-avatar">🎖️</div>
+      <div>
+        <div class="teacher-name">Brig. Gen. Mohammed Zaber Hossain, PhD</div>
+        <div class="teacher-role">অধ্যক্ষ, DRMC</div>
+      </div>
+    </div>
+    <div class="teacher-card" style="background:transparent;padding:0;margin-bottom:10px;">
+      <div class="teacher-avatar">👩‍🏫</div>
+      <div>
+        <div class="teacher-name">Fatema Zohra</div>
+        <div class="teacher-role">উপাধ্যক্ষ (সিনিয়র) • প্রভাতি</div>
+        <div class="teacher-phone">📱 01914865142</div>
+      </div>
+      <a href="tel:01914865142" class="call-btn">📞</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span>🔗</span> গুরুত্বপূর্ণ লিংক</div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <a href="https://www.drmc.edu.bd" target="_blank" style="display:flex;align-items:center;gap:10px;background:#0d1710;padding:12px;border-radius:8px;text-decoration:none;color:white;font-size:13px;">
+        🌐 DRMC অফিশিয়াল ওয়েবসাইট
+      </a>
+      <a href="https://www.drmc.edu.bd/Pages/NoticeBoard/NoticeBoardNew.aspx" target="_blank" style="display:flex;align-items:center;gap:10px;background:#0d1710;padding:12px;border-radius:8px;text-decoration:none;color:white;font-size:13px;">
+        📋 নোটিশ বোর্ড
+      </a>
+      <a href="https://www.drmc.edu.bd/Pages/Content.aspx?pageid=588" target="_blank" style="display:flex;align-items:center;gap:10px;background:#0d1710;padding:12px;border-radius:8px;text-decoration:none;color:white;font-size:13px;">
+        📅 একাডেমিক ক্যালেন্ডার
+      </a>
+      <a href="https://www.facebook.com/drmc.edu.bd" target="_blank" style="display:flex;align-items:center;gap:10px;background:#0d1710;padding:12px;border-radius:8px;text-decoration:none;color:white;font-size:13px;">
+        📘 Facebook পেজ
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Clock
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  const s = String(now.getSeconds()).padStart(2,'0');
+  document.getElementById('clock').textContent = h+':'+m+':'+s;
+
+  const days = ['রবিবার','সোমবার','মঙ্গলবার','বুধবার','বৃহস্পতিবার','শুক্রবার','শনিবার'];
+  const months = ['জানুয়ারি','ফেব্রুয়ারি','মার্চ','এপ্রিল','মে','জুন','জুলাই','আগস্ট','সেপ্টেম্বর','অক্টোবর','নভেম্বর','ডিসেম্বর'];
+  document.getElementById('dateDisplay').textContent =
+    days[now.getDay()] + ', ' + now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// Tab switching
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  const tabs = ['home','notice','rules','teachers','clubs','contact'];
+  const idx = tabs.indexOf(id);
+  document.querySelectorAll('.tab-btn')[idx].classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// Notice filter
+function filterNotice(cat, btn) {
+  document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#notice-list .notice-item').forEach(item => {
+    if(cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+// Teacher search
+function searchTeachers(val) {
+  const q = val.toLowerCase();
+  document.querySelectorAll('#teacher-list .teacher-card').forEach(card => {
+    const name = (card.dataset.name || '').toLowerCase();
+    const text = card.innerText.toLowerCase();
+    card.style.display = (text.includes(q) || name.includes(q)) ? 'flex' : 'none';
+  });
+}
+
+// Teacher filter
+function filterTeachers(role, btn) {
+  document.querySelectorAll('.filter-row .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('teacher-search').value = '';
+  document.querySelectorAll('#teacher-list .teacher-card').forEach(card => {
+    if(role === 'all' || card.dataset.role === role) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
